@@ -20,7 +20,11 @@ const openapi = JSON.parse(
 export function createApp() {
   const app = express()
 
-  app.use(helmet())
+  // helmet's default Cross-Origin-Resource-Policy ("same-origin") makes browsers
+  // block cross-origin loads of this API's images/responses — the frontend runs
+  // on a different origin, so relax it (CORS below only governs fetch/XHR, not
+  // this separate CORP check that <img> tags are also subject to).
+  app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }))
   // Allow any origin — the API is public and consumed from multiple frontends.
   app.use(cors({ origin: true }))
   app.use(express.json({ limit: '1mb' }))
