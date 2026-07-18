@@ -39,6 +39,9 @@ export function createApp() {
     })
   })
 
+  // vercel.json routes every request through this single function, so Vercel's
+  // own static-file serving for /public never kicks in — serve it ourselves.
+  app.use(express.static(path.resolve(__dirname, '..', 'public')))
   app.use(`/${env.uploadDir}`, express.static(path.resolve(__dirname, '..', '..', env.uploadDir)))
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapi))
   app.use(`/api/${env.apiVersion}`, apiRoutes)
