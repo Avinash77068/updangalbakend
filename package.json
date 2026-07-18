@@ -9,6 +9,7 @@
     "migrate": "node src/database/migrate-objectids.js",
     "sync-indexes": "node src/database/sync-indexes.js",
     "backfill:ad-position": "node src/database/backfill-ad-position.js",
+    "backfill:ad-images": "node src/database/backfill-ad-images.js",
     "check": "node --check src/server.js"
   },
   "dependencies": {
