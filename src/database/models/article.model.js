@@ -42,6 +42,14 @@ const articleSchema = new mongoose.Schema({
   categorySlug: { type: String, required: true, trim: true, lowercase: true, index: true },
   image: { type: String, default: '' },
   imageAlt: { type: String, default: '' },
+  // Presentation of the hero image, controlled from the CMS.
+  imageWidth: { type: Number, default: null, min: 0 }, // pixels; null = natural/responsive
+  imageHeight: { type: Number, default: null, min: 0 }, // pixels; null = auto
+  imageSide: {
+    type: String,
+    enum: { values: ['left', 'center', 'right', 'full'], message: 'Invalid imageSide: {VALUE}' },
+    default: 'full',
+  },
   author: { type: authorSchema, required: true },
   status: {
     type: String,
