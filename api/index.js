@@ -1,3 +1,4 @@
+
 import { connectDB } from '../src/config/db.js'
 
 // Vercel serverless entry point.
