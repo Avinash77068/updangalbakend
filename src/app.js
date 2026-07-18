@@ -27,6 +27,17 @@ export function createApp() {
   app.use(morgan(env.nodeEnv === 'production' ? 'combined' : 'dev'))
   app.use(rateLimit)
 
+  app.get('/', (_req, res) => {
+    res.json({
+      name: 'UpDangal API',
+      status: 'ok',
+      version: env.apiVersion,
+      docs: '/docs',
+      api: `/api/${env.apiVersion}`,
+      health: `/api/${env.apiVersion}/health`,
+    })
+  })
+
   app.use(`/${env.uploadDir}`, express.static(path.resolve(__dirname, '..', '..', env.uploadDir)))
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapi))
   app.use(`/api/${env.apiVersion}`, apiRoutes)
