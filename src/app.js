@@ -21,7 +21,8 @@ export function createApp() {
   const app = express()
 
   app.use(helmet())
-  app.use(cors("*"))
+  // Allow any origin — the API is public and consumed from multiple frontends.
+  app.use(cors({ origin: true }))
   app.use(express.json({ limit: '1mb' }))
   app.use(express.urlencoded({ extended: true }))
   app.use(morgan(env.nodeEnv === 'production' ? 'combined' : 'dev'))
